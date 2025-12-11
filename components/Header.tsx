@@ -267,14 +267,14 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, theme, toggleT
                   */}
                   <div className="">
                     <h6 className="fw-bold text-uppercase text-muted small mb-3">Desenvolvedor</h6>
-                     <div className="p-2 text-secondary small d-flex align-items-center opacity-75">
+                     <div className="p-2 text-secondary d-flex align-items-center opacity-75">
                        {/* --- ESPAÇO PARA TEXTO DO DESENVOLVEDOR --- */}
                        <div className="pe-2 align-items-center border-end border-secondary">
                           <FuoneBrand className="icon" style={{ width: 48, height: 48,}} />
                         </div>
                        <div className="ps-2 border-left border-secondary">
-                        <span className="fw-bold text-primaryy">FuoneDev</span><br/>
-                        <a className="text-muted no-decoration" href="mailto:fuone.dev@gmail.com" target="_blank">fuone.dev@gmail.com</a>
+                        <a className="text-muted no-decoration" href="https://b.link/f/aboutme" target="_blank"><span className="fw-bold fs-6">FuoneDev</span></a><br/>
+                        <a className="text-muted no-decoration small" href="mailto:fuone.dev@gmail.com" target="_blank">fuone.dev@gmail.com</a>
                        </div>
                     </div>
                   </div>
