@@ -15,41 +15,41 @@
     <style>
       /* 
        * ========================================================================
-       *  ZONA DE CONFIGURAÃÃO DE CORES (USER CONFIGURATION)
+       *  ZONA DE CONFIGURAÇÃO DE CORES (USER CONFIGURATION)
        * ========================================================================
-       *  Altere os valores HEX abaixo para mudar a aparÃªncia de TODO o sistema.
+       *  Altere os valores HEX abaixo para mudar a aparência de TODO o sistema.
        *  
-       *  IMPORTANTE: Para as cores principais, forneÃ§a tambÃ©m a versÃ£o RGB 
-       *  (trÃªs nÃºmeros separados por vÃ­rgula) para efeitos de transparÃªncia.
+       *  IMPORTANTE: Para as cores principais, forneça também a versão RGB 
+       *  (três números separados por vírgula) para efeitos de transparência.
        */
       :root {
         /* --- 1. CORES DA MARCA E SISTEMA --- */
-        --color-primary:      var(--neutral-900); /* #2563eb; /* Cor principal (BotÃµes, Links, Destaques) */
+        --color-primary:      var(--neutral-900); /* #2563eb; /* Cor principal (Botões, Links, Destaques) */
         --color-primary-rgb:  var(--neutral-900-rgb); /* 37, 99, 235;*/
 
-        --color-success:      #198754; /* Sucesso, EficiÃªncia boa */
+        --color-success:      #198754; /* Sucesso, Eficiência boa */
         --color-success-rgb:  25, 135, 84;
 
-        --color-warning:      #f59e0b; /* Alertas, Custo mÃ©dio */
+        --color-warning:      #f59e0b; /* Alertas, Custo médio */
         --color-warning-rgb:  245, 158, 11;/**/
 
         --color-danger:       #e00303;/*#ef4444; /* Erro, Custo alto  */
         --color-danger-rgb:   224, 3, 3;/*239, 68, 68;/**/
 
-        --color-info:         #3b82f6; /* InformaÃ§Ãµes gerais */
+        --color-info:         #3b82f6; /* Informações gerais */
         --color-info-rgb:     59, 130, 246;
 
-        /* --- 2. CORES DE COMBUSTÃVEIS (GRÃFICOS) --- */
+        /* --- 2. CORES DE COMBUSTÍVEIS (GRÁFICOS) --- */
         --fuel-gasoline:      var(--color-danger);/*#ef4444; /* Gasolina Comum */
         --fuel-gas-additive:  #f97316; /* Gasolina Aditivada */
         --fuel-ethanol:       var(--color-success);/*#22c55e; /* Etanol */
         --fuel-diesel:        var(--neutral-500);/*#64748b; /* Diesel */
         --fuel-diesel-s10:    var(--neutral-600);/*#475569; /* Diesel S10 */
         --fuel-gnv:           #eab308; /* GNV */
-        --fuel-electric:      var(--color-info);/*#3b82f6; /* ElÃ©trico */
+        --fuel-electric:      var(--color-info);/*#3b82f6; /* Elétrico */
         --fuel-other:         #a855f7; /* Outros */
 
-        /* --- 3. CORES DE MÃTRICAS (GRÃFICOS) --- */
+        /* --- 3. CORES DE MÉTRICAS (GRÁFICOS) --- */
         --metric-efficiency:  #10b981; /* Verde */
         --metric-cost-km:     var(--color-warning);/*#f59e0b; /* Laranja */
         --metric-cost-day:    var(--color-danger);/*#ef4444; /* Vermelho */
@@ -69,14 +69,14 @@
         --neutral-900: #0f172a; --neutral-900-rgb: 15, 23, 42;
         --neutral-950: #020617;
 
-        /* --- 5. OUTRAS DEFINIÃÃES DE COR --- */
+        /* --- 5. OUTRAS DEFINIÇÕES DE COR --- */
         
         /* TOOLTIPS CONFIGURATION */
         --hint-bg-color: var(--neutral-600);
         --hint-txt-color: #fff;
         --hint-opacity: 1;
 
-        /* CONFIGURAÃÃES GLOBAIS DE UI */
+        /* CONFIGURAÇÕES GLOBAIS DE UI */
         --bs-font-sans-serif: 'Inter', sans-serif;
         --transition-speed: 0.3s;
         --app-border-radius: 0.75rem;
@@ -84,7 +84,7 @@
 
       /* 
        * ==========================================
-       *  MAPEAMENTO AUTOMÃTICO (NÃO ALTERAR ABAIXO)
+       *  MAPEAMENTO AUTOMÁTICO (NÃO ALTERAR ABAIXO)
        * ==========================================
        */
 
@@ -121,7 +121,7 @@
 
       /* TEMA ESCURO (DARK) */
       [data-bs-theme="dark"] {
-        /* No modo escuro, clareamos um pouco a cor primÃ¡ria para contraste */
+        /* No modo escuro, clareamos um pouco a cor primária para contraste */
         --bs-primary: #60a5fa; 
         --bs-primary-rgb: 96, 165, 250;
         
@@ -451,11 +451,21 @@
         color: var(--f-icon-color-2);
       }
     </style>
-  </head>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+  }
+}
+</script>
+</head>
   <body>
     <div id="root"></div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="/index.tsx"></script>
-</body>
+  </body>
 </html>
