@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="light" class="sicomb20">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SICOMB</title>
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Hint.css for Tooltips -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@3.0.0/hint.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&amp;display=swap">
+    <style>
+      /* 
+       * ========================================================================
+       *  ZONA DE CONFIGURAÇÃO DE CORES (USER CONFIGURATION)
+       * ========================================================================
+       *  Altere os valores HEX abaixo para mudar a aparência de TODO o sistema.
+       *  
+       *  IMPORTANTE: Para as cores principais, forneça também a versão RGB 
+       *  (três números separados por vírgula) para efeitos de transparência.
+       */
+      :root {
+        /* --- 1. CORES DA MARCA E SISTEMA --- */
+        --color-primary:      var(--neutral-900); /* #2563eb; /* Cor principal (Botões, Links, Destaques) */
+        --color-primary-rgb:  var(--neutral-900-rgb); /* 37, 99, 235;*/
+
+        --color-success:      #198754; /* Sucesso, Eficiência boa */
+        --color-success-rgb:  25, 135, 84;
+
+        --color-warning:      #f59e0b; /* Alertas, Custo médio */
+        --color-warning-rgb:  245, 158, 11;/**/
+
+        --color-danger:       #e00303;/*#ef4444; /* Erro, Custo alto  */
+        --color-danger-rgb:   224, 3, 3;/*239, 68, 68;/**/
+
+        --color-info:         #3b82f6; /* Informações gerais */
+        --color-info-rgb:     59, 130, 246;
+
+        /* --- 2. CORES DE COMBUSTÍVEIS (GRÁFICOS) --- */
+        --fuel-gasoline:      var(--color-danger);/*#ef4444; /* Gasolina Comum */
+        --fuel-gas-additive:  #f97316; /* Gasolina Aditivada */
+        --fuel-ethanol:       var(--color-success);/*#22c55e; /* Etanol */
+        --fuel-diesel:        var(--neutral-500);/*#64748b; /* Diesel */
+        --fuel-diesel-s10:    var(--neutral-600);/*#475569; /* Diesel S10 */
+        --fuel-gnv:           #eab308; /* GNV */
+        --fuel-electric:      var(--color-info);/*#3b82f6; /* Elétrico */
+        --fuel-other:         #a855f7; /* Outros */
+
+        /* --- 3. CORES DE MÉTRICAS (GRÁFICOS) --- */
+        --metric-efficiency:  #10b981; /* Verde */
+        --metric-cost-km:     var(--color-warning);/*#f59e0b; /* Laranja */
+        --metric-cost-day:    var(--color-danger);/*#ef4444; /* Vermelho */
+        --metric-volume:      var(--color-info);/*#3b82f6; /* Azul */
+        --metric-price:       #8b5cf6; /* Roxo */
+
+        /* --- 4. ESCALA NEUTRA (FUNDO E TEXTO) --- */
+        --neutral-50:  #f8fafc;
+        --neutral-100: #f1f5f9;
+        --neutral-200: #e2e8f0;
+        --neutral-300: #cbd5e1;
+        --neutral-400: #94a3b8;
+        --neutral-500: #64748b;
+        --neutral-600: #475569; --neutral-600-rgb: 71, 85, 105;
+        --neutral-700: #334155; --neutral-800-rgb: 30, 41, 59;
+        --neutral-800: #1e293b;
+        --neutral-900: #0f172a; --neutral-900-rgb: 15, 23, 42;
+        --neutral-950: #020617;
+
+        /* --- 5. OUTRAS DEFINIÇÕES DE COR --- */
+        
+        /* TOOLTIPS CONFIGURATION */
+        --hint-bg-color: var(--neutral-600);
+        --hint-txt-color: #fff;
+        --hint-opacity: 1;
+
+        /* CONFIGURAÇÕES GLOBAIS DE UI */
+        --bs-font-sans-serif: 'Inter', sans-serif;
+        --transition-speed: 0.3s;
+        --app-border-radius: 0.75rem;
+      }
+
+      /* 
+       * ==========================================
+       *  MAPEAMENTO AUTOMÁTICO (NÃO ALTERAR ABAIXO)
+       * ==========================================
+       */
+
+      /* TEMA CLARO (LIGHT) */
+      [data-bs-theme="light"] {
+        --bs-primary: var(--color-primary);
+        --bs-primary-rgb: var(--color-primary-rgb);
+        --bs-btn-primary: var(--color-primary);
+        
+        /*--bs-success: var(--color-success);*/
+        /*--bs-success-rgb: var(--color-success-rgb);*/
+        
+        --bs-warning: var(--color-warning);
+        --bs-warning-rgb: var(--color-warning-rgb);
+        
+        --bs-danger: var(--color-danger);
+        --bs-danger-rgb: var(--color-danger-rgb);
+
+        --bs-body-bg: var(--neutral-50);
+        --bs-body-color: var(--neutral-900);
+        
+        --bs-card-bg: #ffffff;
+        --bs-border-color: var(--neutral-300);
+        
+        /* App Custom vars */
+        --app-nav-bg: #ffffff;
+        --app-nav-text: var(--neutral-900);
+        --app-input-bg: #ffffff;
+        --app-input-border: var(--neutral-300);
+        --app-input-placeholder: var(--neutral-400);
+
+        --proj-icon-color: var(--bs-primary);
+      }
+
+      /* TEMA ESCURO (DARK) */
+      [data-bs-theme="dark"] {
+        /* No modo escuro, clareamos um pouco a cor primária para contraste */
+        --bs-primary: #60a5fa; 
+        --bs-primary-rgb: 96, 165, 250;
+        
+        --bs-body-bg: var(--neutral-950);
+        --bs-body-color: var(--neutral-200);
+        
+        --bs-card-bg: var(--neutral-800);
+        --bs-border-color: var(--neutral-700);
+        
+        --bs-secondary: var(--neutral-400);
+        
+        --app-nav-bg: var(--neutral-900);
+        --app-nav-text: var(--neutral-200);
+        --app-input-bg: var(--neutral-900);
+        --app-input-border: var(--neutral-600);
+        --app-input-placeholder: var(--neutral-500);
+
+        /* Tooltip overrides for Dark Mode */
+        --hint-bg-color: var(--neutral-50);
+        --hint-txt-color: var(--neutral-900);
+
+        --proj-icon-color: var(--bs-primary);
+      }
+
+      /* ESTILOS GERAIS */
+      body {
+        font-family: var(--bs-font-sans-serif);
+        transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+      }
+
+      .card {
+        border: 1px solid var(--bs-border-color);
+        border-radius: var(--app-border-radius);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        background-color: var(--bs-card-bg);
+        transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+      }
+      
+      /* CARD HOVER & Z-INDEX FIX */
+      .card-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color var(--transition-speed) ease;
+        position: relative; /* Create stacking context scope */
+      }
+      
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+        z-index: 50; /* Bring to front on hover so tooltips overlap other cards */
+      }
+      
+      [data-bs-theme="dark"] .card {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+      }
+
+      .navbar {
+        background-color: var(--app-nav-bg);
+        color: var(--app-nav-text);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: background-color var(--transition-speed) ease;
+      }
+      
+      [data-bs-theme="dark"] .navbar {
+        border-bottom: 1px solid var(--neutral-800);
+      }
+
+      .navbar-brand, .nav-link, .navbar-text {
+        color: var(--app-nav-text) !important;
+      }
+      
+      .nav-link:hover {
+        background-color: rgba(0,0,0, 0.05);
+        border-radius: 0.375rem;
+      }
+      [data-bs-theme="dark"] .nav-link:hover {
+        background-color: rgba(255,255,255, 0.1);
+      }
+      
+      .nav-link.active {
+        background-color: rgba(var(--bs-primary-rgb), 0.1);
+        color: var(--bs-primary) !important;
+        font-weight: 600;
+        border-radius: 0.375rem;
+      }
+      [data-bs-theme="dark"] .nav-link.active {
+        background-color: rgba(255,255,255, 0.2);
+        color: var(--neutral-50) !important;
+      }
+
+      .form-control, .form-select {
+        background-color: var(--app-input-bg);
+        border-color: var(--app-input-border);
+        color: var(--bs-body-color);
+        border-radius: 0.5rem;
+        padding: 0.625rem 0.75rem;
+        transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .form-control:focus, .form-select:focus {
+        border-color: var(--bs-primary);
+        background-color: var(--app-input-bg);
+        color: var(--bs-body-color);
+        box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15);
+      }
+
+      .form-control::placeholder {
+        color: var(--app-input-placeholder);
+      }
+      
+      .form-select option {
+        background-color: var(--app-input-bg);
+        color: var(--bs-body-color);
+      }
+
+      .bg-body-secondary {
+         background-color: var(--neutral-100) !important;
+      }
+      [data-bs-theme="dark"] .bg-body-secondary {
+         background-color: var(--neutral-800) !important;
+         color: var(--neutral-50);
+      }
+      
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: var(--neutral-300); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--neutral-400); }
+      [data-bs-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--neutral-600); }
+
+      .animate-fade-in { animation: fadeIn 0.5s ease-in-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+      .animate-spin { animation: spin 1s linear infinite; }
+      @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      
+      .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+      
+      .animate-pop-alert { animation: popAlert 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+      @keyframes popAlert {
+        0% { opacity: 0; transform: translate(-50%, 20px) scale(0.8); }
+        100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+      }
+
+      .modal-backdrop.show { opacity: 0.5; }
+      
+      /* TOOLTIP FIXES & THEME APPLICATION */
+      [class*="hint--"]:after {
+        background-color: var(--hint-bg-color) !important;
+        color: var(--hint-txt-color) !important;
+        
+        white-space: normal !important;
+        max-width: 250px !important;
+        text-align: left;
+        line-height: 1.4;
+        text-shadow: none !important;
+      }
+
+      /* Fix Arrows to match background */
+      [class*="hint--"].hint--top:before { border-top-color: var(--hint-bg-color) !important; }
+      [class*="hint--"].hint--bottom:before { border-bottom-color: var(--hint-bg-color) !important; }
+      [class*="hint--"].hint--left:before { border-left-color: var(--hint-bg-color) !important; }
+      [class*="hint--"].hint--right:before { border-right-color: var(--hint-bg-color) !important; }
+      
+      /* Overrides para Header customizado no estilo anterior, mas adaptado */
+      .proj-brand{
+        --tam: 20px;
+        font-family: "Montserrat", sans-serif;
+      }
+      .proj-brand i, i.proj-brand,
+      .proj-brand svg, svg.proj-brand{
+        color: var(--proj-icon-color);
+        fill: var(--proj-icon-color);
+      }
+
+      .proj-name{
+        font-weight: 900;
+        font-size: var(--tam);
+      }
+      header .div-proj-title{
+        display: flex;
+        align-items: center;
+      }
+      header .proj-name{        
+        color: var(--bs-primary);        
+      }
+      [data-bs-theme="dark"] header .proj-name{
+        color: var(--neutral-50);
+      }
+      header .proj-description{
+        font-size: calc(var(--tam) * 0.6);
+        /*font-size: 0.8rem;*/
+        color: var(--neutral-500);
+        line-height: 0.5;
+      }
+      header .proj-icon{
+        font-size: var(--tam);
+        width: var(--tam);
+        height: var(--tam);
+        margin-right: 5px;
+      }
+      
+      .btn-primary {
+        /*--bs-btn-active-color: inherit;*/
+        --bs-btn-active-bg: color-mix(in srgb, var(--neutral-800), black 10%);
+        --bs-btn-hover-bg: color-mix(in srgb, var(--bs-primary), black 10%);
+
+        background-color: var(--neutral-600);
+        border-color: var(--neutral-600);
+      }
+      .btn-primary:hover,
+      .btn-primary:active {        
+
+       /* background-color: color-mix(in srgb, var(--bs-primary), black 10%);*/
+        border-color: color-mix(in srgb, var(--bs-primary), black 10%);
+      }
+    </style>
+    <style id="custom">
+      .btn-primary {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: var(--neutral-700);
+        --bs-btn-border-color: var(--neutral-700);
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: var(--bs-primary);
+        --bs-btn-hover-border-color: var(--bs-primary);
+        --bs-btn-focus-shadow-rgb: 49, 132, 253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: var(--bs-primary);
+        --bs-btn-active-border-color: var(--bs-primary);
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: var(--neutral-600);
+        --bs-btn-disabled-border-color: var(--neutral-600);
+      }
+      .btn-outline-primary {
+        --bs-btn-color: var(--neutral-700);
+        --bs-btn-border-color: var(--neutral-700);
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg:var(--neutral-700);
+        --bs-btn-hover-border-color: var(--neutral-700);
+        --bs-btn-focus-shadow-rgb: 13, 110, 253;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: var(--neutral-900);
+        --bs-btn-active-border-color: var(--neutral-900);
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: var(--neutral-600);
+        --bs-btn-disabled-bg: transparent;
+        --bs-btn-disabled-border-color: var(--neutral-600);
+        --bs-gradient: none;
+      }
+      .pagination {
+        --bs-pagination-padding-x: 0.75rem;
+        --bs-pagination-padding-y: 0.375rem;
+        --bs-pagination-font-size: 1rem;
+        --bs-pagination-color: var(--bs-link-color);
+        --bs-pagination-bg: var(--bs-body-bg);
+        --bs-pagination-border-width: var(--bs-border-width);
+        --bs-pagination-border-color: var(--bs-border-color);
+        --bs-pagination-border-radius: var(--bs-border-radius);
+        --bs-pagination-hover-color: var(--bs-link-hover-color);
+        --bs-pagination-hover-bg: var(--bs-tertiary-bg);
+        --bs-pagination-hover-border-color: var(--bs-border-color);
+        --bs-pagination-focus-color: var(--bs-link-hover-color);
+        --bs-pagination-focus-bg: var(--bs-secondary-bg);
+        --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        --bs-pagination-active-color: #fff;
+        --bs-pagination-active-bg:var(--bs-link-color);
+        --bs-pagination-active-border-color: var(--bs-link-color);
+        --bs-pagination-disabled-color: var(--bs-secondary-color);
+        --bs-pagination-disabled-bg: var(--bs-secondary-bg);
+        --bs-pagination-disabled-border-color: var(--bs-border-color);
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      html{
+        color-scheme: light;
+        background: light-dark(white, black);
+        color: light-dark(black, white);
+      }
+
+      .sicomb20{
+        --txt-color: var(--neutral-900);
+        --bs-form-invalid-color: var(--color-danger);
+        --bs-link-color: var(--neutral-800);/* ...fd */
+        --bs-link-hover-color: var(--bs-primary);/* ...ca */
+        --footer-txt-color: var(--neutral-300);
+        --proj-icon-color: var(--color-primary);
+
+      }
+      .sicomb20 header .menu{          
+        color: var(--txt-color);
+        opacity: unset;
+      }
+      .sicomb20 header .menu-open{          
+        background-color: var(--neutral-50);
+      }
+      .sicomb20 header .btn-link{
+        --bs-btn-color: var(--neutral-600);	
+      }
+
+      .invalid-feedback {
+        color: var(--bs-form-invalid-color);
+      }
+
+      .paging{display: flex}
+      .paging *{
+        min-width: 80px;
+      }
+
+      .hide{display: none!important;}
+
+      .no-decoration{text-decoration: none !important;}
+      .flex-wrap-wrap{flex-wrap: wrap !important;}
+      .justify-items-end{justify-items: end !important;}
+
+      .fuone-icon{
+        --f-icon-color-full: var(--neutral-400);
+        --f-icon-color-1: var(--neutral-400);
+        --f-icon-color-2: var(--neutral-500);
+      }
+      .fuone-icon .f-icon-color-1{
+        fill: var(--f-icon-color-1);
+        color: var(--f-icon-color-1);
+      }
+      .fuone-icon .f-icon-color-2{
+        fill: var(--f-icon-color-2);
+        color: var(--f-icon-color-2);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

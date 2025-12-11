@@ -1,0 +1,7 @@
+{
+  "name": "SICOMB 2.0",
+  "description": "Sistema de Controle de Combustível",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
