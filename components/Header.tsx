@@ -4,6 +4,9 @@ import { ViewState, Theme } from '../types';
 import { Menu, X, BarChart3, PlusCircle, List, Sun, Moon, Info, Check } from 'lucide-react';
 import { PROJ_NAME, PROJ_VERSION, PROJ_DESCRIPTION, PROJ_ICON } from '../constants';
 
+var Build = 251215.01
+var Proj_version_full = PROJ_VERSION + "." + Build;
+
 interface HeaderProps {
   currentView: ViewState;
   onNavigate: (view: ViewState) => void;
@@ -283,7 +286,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, theme, toggleT
                     <h4 className="proj-name m-0 p-0 lh-1">{PROJ_NAME}</h4>
                     <p className="text-muted m-0 mb-3 lh-1">{PROJ_DESCRIPTION}</p>
                     <span className="badge bg-info bg-opacity-10 text-secondary border border-secondary border-opacity-25 rounded-pill mb-3">
-                      Versão {PROJ_VERSION}
+                      Versão {Proj_version_full}
                     </span>
                   </div>
 

@@ -45,6 +45,12 @@ interface MetricDef {
 }
 
 const METRIC_DEFINITIONS: Record<string, MetricDef> = {
+  refuelCount: {
+    id: 'refuelCount',
+    label: 'Quantidade de Abastecimentos',
+    description: 'Número total de registros de abastecimento no período selecionado.',
+    getValue: (s) => String(s.refuelCount).padStart(2, '0')
+  },
   costPerDay: {
     id: 'costPerDay',
     label: 'Custo/Dia (Período)',
@@ -80,6 +86,7 @@ const METRIC_DEFINITIONS: Record<string, MetricDef> = {
 };
 
 const DEFAULT_METRIC_ORDER = [
+  'refuelCount',
   'totalDiscounts',
   'avgDiscount',
   'costPerDay', 
@@ -89,6 +96,7 @@ const DEFAULT_METRIC_ORDER = [
 
 interface FuelStat {
   fuel: string;
+  refuelCountPeriod: number;
   avgPricePeriod: number;
   maxPriceGlobal: number;
   maxPricePeriod: number;
@@ -101,6 +109,7 @@ interface FuelStat {
 }
 
 interface DashboardStats {
+  refuelCount: number;
   totalSpent: number;
   totalLiters: number;
   avgEfficiency: number;
@@ -853,6 +862,7 @@ const Dashboard: React.FC = () => {
     if (filteredRecords.length === 0) return null;
 
     const dataToProcess = filteredRecords;
+    const refuelCount = dataToProcess.length;
 
     // Basic Aggregates
     const totalSpent = dataToProcess.reduce((acc, r) => acc + r.total, 0);
@@ -961,6 +971,7 @@ const Dashboard: React.FC = () => {
     const totalAvgDaysBetween = intervalsCount > 0 ? totalDaysDiff / intervalsCount : 0;
     fuelStats['Média Geral'] = {
         fuel: 'Geral',
+        refuelCountPeriod: 0,
         avgPricePeriod: 0, maxPriceGlobal: 0, maxPricePeriod: 0, minPriceGlobal: 0, minPricePeriod: 0,
         costPerKmPeriod: 0, costPerKmCurrentMonth: 0, avgKmBetweenPeriod: 0, 
         avgDaysBetweenPeriod: totalAvgDaysBetween
@@ -1025,6 +1036,7 @@ const Dashboard: React.FC = () => {
 
         fuelStats[fuel] = {
             fuel,
+            refuelCountPeriod: fPeriodRecs.length,
             avgPricePeriod,
             maxPriceGlobal,
             maxPricePeriod,
@@ -1119,6 +1131,7 @@ const Dashboard: React.FC = () => {
     const availableMonths = sortedMonths.slice().reverse();
 
     return {
+      refuelCount,
       totalSpent,
       totalLiters,
       avgEfficiency,
@@ -1367,7 +1380,16 @@ const Dashboard: React.FC = () => {
                              return (
                                <li key={metricId} className="list-group-item d-flex justify-content-between align-items-center px-0 animate-fade-in py-2">
                                   <div className="d-flex align-items-center gap-1">
-                                      <span className="text-muted small">{def.label}</span>
+                                      <span className="text-muted small">
+                                        {metricId === 'refuelCount' ? (
+                                          <>
+                                            <span className="d-none d-sm-inline">{def.label}</span>
+                                            <span className="d-inline d-sm-none">Qtd Abastecimentos</span>
+                                          </>
+                                        ) : (
+                                          def.label
+                                        )}
+                                      </span>
                                       <div className="d-flex align-items-center hint--top-right hint--rounded hint--medium" aria-label={def.description}>
                                           <CircleHelp size={12} className="text-muted opacity-50 cursor-help" />
                                       </div>
@@ -1560,6 +1582,11 @@ const Dashboard: React.FC = () => {
                                         </div>
                                         
                                         <div className="d-flex flex-column gap-1">
+                                           <FuelStatRow 
+                                              label="Qtd. Abastecimentos" 
+                                              value={String(fStat.refuelCountPeriod).padStart(2, '0')}
+                                              tooltip="Quantidade de abastecimentos registrados para este combustível no período selecionado." 
+                                           />
                                            <FuelStatRow 
                                               label="Média de preço (período)" 
                                               value={formatCurrency(fStat.avgPricePeriod)}
